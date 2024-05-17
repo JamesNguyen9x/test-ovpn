@@ -34,15 +34,15 @@ import (
 	"sync"
 	"time"
 
-	"github.com/sirupsen/logrus"
-	"github.com/dropbox/godropbox/container/set"
-	"github.com/dropbox/godropbox/errors"
 	"github.com/JamesNguyen9x/test-ovpn/service/command"
 	"github.com/JamesNguyen9x/test-ovpn/service/errortypes"
 	"github.com/JamesNguyen9x/test-ovpn/service/event"
 	"github.com/JamesNguyen9x/test-ovpn/service/network"
 	"github.com/JamesNguyen9x/test-ovpn/service/token"
 	"github.com/JamesNguyen9x/test-ovpn/service/utils"
+	"github.com/dropbox/godropbox/container/set"
+	"github.com/dropbox/godropbox/errors"
+	"github.com/sirupsen/logrus"
 	"golang.org/x/crypto/nacl/box"
 )
 
@@ -146,7 +146,7 @@ type Profile struct {
 	wgQuickLock        sync.Mutex       `json:"-"`
 	connected          bool             `json:"-"`
 	stop               bool             `json:"-"`
-	Otp          	   string           `json:"-"`
+	Otp                string           `json:"-"`
 	startTime          time.Time        `json:"-"`
 	authFailed         bool             `json:"-"`
 	waiters            []chan bool      `json:"-"`
@@ -986,6 +986,7 @@ func (p *Profile) Init() {
 }
 
 func (p *Profile) Start(timeout bool) (err error) {
+	logrus.Info("profile: Start")
 	if p.Mode == Wg {
 		err = p.startWg(timeout)
 	} else {
@@ -1863,7 +1864,7 @@ func (p *Profile) pingWg(remote string) (wgData *WgPingData, err error) {
 		return
 	}
 	defer res.Body.Close()
-    fmt.Printf("hello, world\n")
+	fmt.Printf("hello, world\n")
 	if res.StatusCode != 200 {
 		if res.StatusCode < 400 || res.StatusCode >= 500 {
 			//retry = true
@@ -2393,7 +2394,7 @@ func (p *Profile) watchWg() {
 
 		//if data == nil || !data.Status {
 		//	logrus.Error("profile: Keepalive bad status")
-//
+		//
 		//	go p.restart()
 		//	return
 		//}
