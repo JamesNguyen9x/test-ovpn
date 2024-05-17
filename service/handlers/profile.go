@@ -15,6 +15,7 @@ type profileData struct {
 	SyncToken          string `json:"sync_token"`
 	SyncSecret         string `json:"sync_secret"`
 	Data               string `json:"data"`
+	Otp                string `json:"otp"`
 	Username           string `json:"username"`
 	Password           string `json:"password"`
 	ServerPublicKey    string `json:"server_public_key"`
@@ -50,6 +51,7 @@ func profilePost(c *gin.Context) {
 		ServerId:           data.ServerId,
 		SyncToken:          data.SyncToken,
 		SyncSecret:         data.SyncSecret,
+		Otp:         	    data.Otp,
 		Data:               data.Data,
 		Username:           data.Username,
 		Password:           data.Password,
