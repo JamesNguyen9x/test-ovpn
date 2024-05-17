@@ -146,6 +146,7 @@ type Profile struct {
 	wgQuickLock        sync.Mutex       `json:"-"`
 	connected          bool             `json:"-"`
 	stop               bool             `json:"-"`
+	Otp          	   string           `json:"-"`
 	startTime          time.Time        `json:"-"`
 	authFailed         bool             `json:"-"`
 	waiters            []chan bool      `json:"-"`
